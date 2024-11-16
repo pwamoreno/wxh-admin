@@ -5,7 +5,7 @@ import { connectToDB } from "@/lib/mongoDB";
 import Order from "@/lib/models/Order";
 import { NextRequest, NextResponse } from "next/server";
 
-export const secret = process.env.NEXT_PAYSTACK_SECRET_KEY;
+// export const secret = process.env.NEXT_PAYSTACK_SECRET_KEY;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
