@@ -59,3 +59,5 @@ export async function POST(req: NextRequest) {
     return new NextResponse("Webhook receipt failed", { status: 500 });
   }
 }
+
+export const dynamic = "force-dynamic"
