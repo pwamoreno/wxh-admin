@@ -1,29 +1,13 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isPublic = createRouteMatcher([
-  // "/sign-in(.*)",
-  // "/sign-up(.*)",
-  "/api(.*)"
+  "/:path*",
 ])
 
-// export default clerkMiddleware((auth, request) => {
-//   if(!isPublic(request)){
-//     auth().protect()
-//   }
-// });
-
-export default clerkMiddleware(async (auth, request) => {
-  // console.log('Requested URL:', request.nextUrl.pathname);
-  // console.log('Is public route:', isPublic(request));
-
-   if (isPublic(request)) {
-    // console.log('Public route access:', request.nextUrl.pathname);
-    return;
+export default clerkMiddleware((auth, request) => {
+  if(!isPublic(request)){
+    auth().protect()
   }
-
-  auth().protect()
-  // The route is protected and the user has a valid session
-  // console.log('Protected route access granted');
 });
 
 
@@ -35,3 +19,32 @@ export const config = {
     '/(api|trpc)(.*)',
   ],
 };
+
+
+
+
+// const isPublic = createRouteMatcher([
+//   // "/sign-in(.*)",
+//   // "/sign-up(.*)",
+//   "/api(.*)"
+// ])
+
+// // export default clerkMiddleware((auth, request) => {
+// //   if(!isPublic(request)){
+// //     auth().protect()
+// //   }
+// // });
+
+// export default clerkMiddleware(async (auth, request) => {
+//   // console.log('Requested URL:', request.nextUrl.pathname);
+//   // console.log('Is public route:', isPublic(request));
+
+//    if (isPublic(request)) {
+//     // console.log('Public route access:', request.nextUrl.pathname);
+//     return;
+//   }
+
+//   auth().protect()
+//   // The route is protected and the user has a valid session
+//   // console.log('Protected route access granted');
+// });
