@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import { connectToDB } from "@/lib/mongoDB";
 import Order from "@/lib/models/Order";
 import { NextRequest, NextResponse } from "next/server";
