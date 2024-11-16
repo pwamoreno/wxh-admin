@@ -13,6 +13,7 @@ interface OrderDocument extends Document{
     items: OrderItems[];
     totalAmount: number;
     status: string
+    createdAt: number
 }
 
 const OrderSchema: Schema = new mongoose.Schema({
