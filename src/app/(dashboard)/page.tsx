@@ -6,7 +6,7 @@ import {
   getTotalCustomers,
   getTotalSales,
 } from "@/lib/actions/action";
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Banknote, CircleUser, ShoppingBag } from "lucide-react";
 
 export default async function Home() {
@@ -29,7 +29,7 @@ export default async function Home() {
   return (
     <>
       <SignedOut>
-        <SignInButton />
+        <RedirectToSignIn />
       </SignedOut>
 
       <SignedIn>
