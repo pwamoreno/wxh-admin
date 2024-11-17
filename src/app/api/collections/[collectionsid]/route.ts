@@ -48,7 +48,7 @@ export const POST = async(req: NextRequest, { params }: { params: {collectionsid
 
         await collection.save()
 
-        return NextResponse.json(collection, {status: 200 })
+        return NextResponse.json(collection, {status: 200, headers: { "Cache-Control": "no-store" }, })
 
     } catch (error) {
         console.log("[collectionsid_POST]", error)
