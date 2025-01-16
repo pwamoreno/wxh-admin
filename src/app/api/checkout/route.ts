@@ -21,9 +21,11 @@ export async function POST(req: NextRequest) {
   await connectToDB();
 
   try {
-    const { cartItems, customer } = await req.json();
+    const { cartItems, customer, formData, shipPrice } = await req.json();
     // console.log(cartItems);
     // console.log(customer);
+    // console.log("[totalPrice]", shipPrice)
+    // console.log("[formData]", formData)
 
     if (!cartItems || !customer || cartItems.length === 0) {
       return new NextResponse("Cart items and customer are required", {
@@ -40,7 +42,7 @@ export async function POST(req: NextRequest) {
           { status: 400 }
         );
       }
-      totalAmount += productPrice * elements.quantity;
+      totalAmount += (productPrice * elements.quantity) + shipPrice;
     }
 
     const orderItems = cartItems.map((item: any) => {
@@ -60,9 +62,10 @@ export async function POST(req: NextRequest) {
       items: orderItems,
       totalAmount,
       status: "pending",
+      shippingInfo: formData
     });
     const savedOrder = await newOrder.save();
-    // console.log(savedOrder)
+    console.log(savedOrder)
 
     const amountInKobo = totalAmount * 100;
 
@@ -77,7 +80,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           email: customer.email,
           amount: amountInKobo,
-          channels: ["card"],
+          channels: ["card","bank_transfer"],
           callback_url: `${process.env.WXH_ECOMM_STORE}/payment_success`,
           metadata: {
             customer,

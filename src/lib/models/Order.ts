@@ -7,12 +7,24 @@ interface OrderItems{
     size: string
 }
 
+interface ShippingInfo {
+    fullName: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+    phone: string;
+    deliveryMode: string;
+  }
+
 interface OrderDocument extends Document{
     customerClerkId: string,
     email: string;
     items: OrderItems[];
     totalAmount: number;
-    status: string
+    status: string;
+    shippingInfo: ShippingInfo;
     createdAt: number
 }
 
@@ -52,7 +64,17 @@ const OrderSchema: Schema = new mongoose.Schema({
     status: {
         type: String,
         default: "pending"
-    }
+    },
+    shippingInfo: {
+        fullName: { type: String, required: true },
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String, required: true },
+        zip: { type: String, required: false },
+        country: { type: String, required: true },
+        phone: { type: String, required: true },
+        deliveryMode: { type: String, required: true },
+      },
 }, {
     timestamps: true
 })

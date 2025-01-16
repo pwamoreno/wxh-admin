@@ -10,13 +10,13 @@ export const GET = async (
   try {
     await connectToDB();
 
-    // console.log("[params]:", params)
+    console.log("[params]:", params)
 
     const orders = await Order.find({
       customerClerkId: params.customerId,
     }).populate({ path: "items.id", model: Product });
 
-    // console.log("[orders]:", orders)
+    console.log("[orders]:", orders)
 
     return NextResponse.json(orders, { status: 200 })
 
