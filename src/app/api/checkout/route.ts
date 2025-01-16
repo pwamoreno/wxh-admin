@@ -80,7 +80,11 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           email: customer.email,
           amount: amountInKobo,
+<<<<<<< HEAD
           channels: ["card","bank_transfer"],
+=======
+          channels: ["card", "bank_transfer"],
+>>>>>>> 597afc99ae88b385b2b0eb3861b3b2c55f7af73b
           callback_url: `${process.env.WXH_ECOMM_STORE}/payment_success`,
           metadata: {
             customer,
